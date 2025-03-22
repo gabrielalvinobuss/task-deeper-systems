@@ -1,29 +1,20 @@
 <template>
   <div>
     <Button label="Create New User" icon="pi pi-plus" @click="openCreateModal" />
-    <table>
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Roles</th>
-          <th>Active</th>
-          <th>Timezone</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="user in users" :key="user._id">
-          <td>{{ user.username }}</td>
-          <!-- <td>{{ user.roles.join(", ") }}</td> -->
-          <td>{{ user.active ? "Yes" : "No" }}</td>
-          <td>{{ user.preferences.timezone }}</td>
-          <td>
-            <Button label="Edit" icon="pi pi-pencil" @click="openEditModal(user)" />
-            <Button label="Delete" icon="pi pi-trash" @click="deleteUser(user.username)" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    
+    <Datatable :value="users">
+      <Column field="username" header="Username"></Column>
+      <Column field="active" header="Active"></Column>
+      <Column field="preferences.timezone" header="Timezone"></Column>
+      <Column header="Actions">
+        <template #body="slotProps">
+          <div class="flex gap-2">
+            <Button label="Edit" icon="pi pi-pencil" @click="openEditModal(slotProps.rowData)" />
+            <Button label="Delete" icon="pi pi-trash" @click="deleteUser(slotProps.rowData.username)" />
+          </div>
+        </template>
+      </Column>
+    </Datatable>
 
     <UserModal
       :showModal="showModal"
@@ -38,12 +29,16 @@
 import { ref } from "vue";
 import Button from "primevue/button";
 import UserModal from "./UserModal.vue";
+import Datatable from "primevue/datatable";
+import Column from "primevue/column";
 
 export default {
   name: "UserList",
   components: {
     Button,
     UserModal,
+    Datatable,
+    Column,
   },
   props: {
     users: Array
@@ -78,7 +73,12 @@ export default {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify({
+                username: user.username,
+                roles: user.roles,
+                preferences: user.preferences,
+                active: user.active,
+            }),
             });
 
             if (response.ok) {

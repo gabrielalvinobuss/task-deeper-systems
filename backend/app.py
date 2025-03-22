@@ -50,8 +50,8 @@ def create_user():
 @app.route('/api/users/<username>', methods=['PUT'])
 def update_user(username):
     user_data = request.json
+    print(user_data)
     result = users_collection.update_one({"username": username}, {"$set": user_data})
-    
     if result.matched_count == 0:
         return jsonify({"message": "User not found"}), 404
 

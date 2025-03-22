@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Dialog v-if="showModal" header="User Form" :visible="showModal" :modal="true" @hide="resetForm">
+    <Dialog header="User Form" :visible="showModal" modal >
       <form @submit.prevent="saveUser">
         <div class="p-field">
           <label for="username">Username</label>
-          <InputText id="username" v-model="user.username" required />
+          <InputText id="username" v-model="user.username" required disabled />
         </div>
         <div class="p-field">
           <label for="roles">Roles</label>
@@ -16,7 +16,7 @@
         </div>
         <div class="p-field">
           <label for="active">Active</label>
-          <Checkbox v-model="user.active" />
+          <Checkbox v-model="user.active" id="active" binary />
         </div>
         <div class="p-field">
           <Button label="Save" type="submit" />
@@ -55,6 +55,7 @@ export default {
 
     const resetForm = () => {
       user.value = { username: "", roles: "", preferences: { timezone: "" }, active: true };
+      console.log("resetForm");
     };
 
     const saveUser = () => {
