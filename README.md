@@ -4,6 +4,8 @@ This repository contains two folders, one for the backend using Python and Mongo
 
 To run the project, both the backend and frontend need to be running simultaneously.
 
+First, to insert the contents of the udata.json file into MongoDB, you need to run Parser.py
+
 To start the backend, you need to run the following command inside the backend folder:
 
 ```sh
