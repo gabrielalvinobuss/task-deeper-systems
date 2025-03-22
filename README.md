@@ -1,13 +1,16 @@
 # Instructions
 
-Este repositório contém duas pastas, uma para backend usando Python e Mongodb e outra para o frontend usando VueJS e PrimeVue.
+This repository contains two folders, one for the backend using Python and MongoDB, and another for the frontend using VueJS and PrimeVue.
 
-Para poder executar o projeto é necessário ter o backend e frontend rodando ao mesmo tempo.
+To run the project, both the backend and frontend need to be running simultaneously.
 
-Para iniciar o projeto no backend é preciso startar dentro da pasta do backend o comando:
+To start the backend, you need to run the following command inside the backend folder:
+
+```sh
 flask run
+```
 
-Na primeira vez para executar a parte do frontend é necessário instalar as dependencias.
+The first time you run the frontend, you need to install the dependencies.
 
 ## Project Setup
 
@@ -15,7 +18,7 @@ Na primeira vez para executar a parte do frontend é necessário instalar as dep
 npm install
 ```
 
-Após instalar as dependencias voce pode iniciar o projeto estando dentro de frontend.
+After installing the dependencies, you can start the frontend from within the frontend folder.
 
 ### Compile and Hot-Reload for Development
 
